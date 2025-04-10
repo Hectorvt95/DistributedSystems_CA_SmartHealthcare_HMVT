@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "grpc.generated.RoomStatus";
+option java_outer_classname = "RoomStatusImpl";
+
+package RoomStatus;
+
+// The service definition
+// The server that you implement must extend the class  <servicename>ImplBase
+// so in this example you will create a server class that extends ---> RoomStatusImplBase
+
+//RoomStatus manages the room availability in order to assign new patients to the available rooms.
+
+//There is a database where the personel manages the progress of the room status through their activities
+//with the room, so if the room has been already assing to a patient it will contain the details, otherwhise 
+//the room will either be occupied or being cleaned
+
+service RoomStatus {
+
+    //the returning of this service will be a stream of BedUpdate status where the program will read
+    //each room and then will bring the status back to the client
+
+    rpc StreamBedStatus (StatusRequest) returns (stream BedUpdate) {}
+
+}
+
+message StatusRequest {
+  string statusRequest = 1;
+}
+
+message BedUpdate {
+  int32 bed_id = 1;
+  string name = 2;
+  string status = 3;          //OCCUPIED = 0;
+  int32 patient_id = 4;      //AVAILABLE = 1;
+  int32 timestamp = 5;       //CLEANING_IN_PROGRESS = 2;
+  
+  
+ 
+}
