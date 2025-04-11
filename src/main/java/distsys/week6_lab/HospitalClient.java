@@ -64,7 +64,7 @@ public class HospitalClient {
         
         String token = Jwts.builder()
                 .setSubject("Hector Valle")
-                .signWith(SignatureAlgorithm.HS256, "HectorValle-DS-CA@2024-Authorization")
+                .signWith(SignatureAlgorithm.HS256, "HectorVall-DS-CA@2024-Authorization")
                 .compact();
         
         String host = "localhost";

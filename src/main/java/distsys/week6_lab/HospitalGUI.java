@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package distsys.week6_lab;
-import grpc.generated.PatientsRoomControl.*;
+
 import grpc.generated.RoomKeyControls.*;
 import grpc.generated.SmartMonitor.*;
 
@@ -762,7 +762,7 @@ public class HospitalGUI extends javax.swing.JFrame {
             @Override
             public void onCompleted(){
                 SwingUtilities.invokeLater(() -> jTextArea2.append(LocalTime.now().toString() + ": Stream is completed \n"));
-               // System.out.println(LocalTime.now().toString() + ": Stream is completed");
+               //System.out.println(LocalTime.now().toString() + ": Stream is completed");
             }
        
         };
