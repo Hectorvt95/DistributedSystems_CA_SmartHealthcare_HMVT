@@ -20,7 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RoomConditions() {
-    temp_ = 0D;
+    temp_ = 0;
     humidity_ = 0;
   }
 
@@ -48,9 +48,9 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 9: {
+          case 8: {
 
-            temp_ = input.readDouble();
+            temp_ = input.readInt32();
             break;
           }
           case 16: {
@@ -91,11 +91,11 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int TEMP_FIELD_NUMBER = 1;
-  private double temp_;
+  private int temp_;
   /**
-   * <code>double temp = 1;</code>
+   * <code>int32 temp = 1;</code>
    */
-  public double getTemp() {
+  public int getTemp() {
     return temp_;
   }
 
@@ -122,8 +122,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (temp_ != 0D) {
-      output.writeDouble(1, temp_);
+    if (temp_ != 0) {
+      output.writeInt32(1, temp_);
     }
     if (humidity_ != 0) {
       output.writeInt32(2, humidity_);
@@ -137,9 +137,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (temp_ != 0D) {
+    if (temp_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(1, temp_);
+        .computeInt32Size(1, temp_);
     }
     if (humidity_ != 0) {
       size += com.google.protobuf.CodedOutputStream
@@ -161,10 +161,8 @@ private static final long serialVersionUID = 0L;
     grpc.generated.RoomKeyControls.RoomConditions other = (grpc.generated.RoomKeyControls.RoomConditions) obj;
 
     boolean result = true;
-    result = result && (
-        java.lang.Double.doubleToLongBits(getTemp())
-        == java.lang.Double.doubleToLongBits(
-            other.getTemp()));
+    result = result && (getTemp()
+        == other.getTemp());
     result = result && (getHumidity()
         == other.getHumidity());
     result = result && unknownFields.equals(other.unknownFields);
@@ -179,8 +177,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + TEMP_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getTemp()));
+    hash = (53 * hash) + getTemp();
     hash = (37 * hash) + HUMIDITY_FIELD_NUMBER;
     hash = (53 * hash) + getHumidity();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -320,7 +317,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      temp_ = 0D;
+      temp_ = 0;
 
       humidity_ = 0;
 
@@ -400,7 +397,7 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(grpc.generated.RoomKeyControls.RoomConditions other) {
       if (other == grpc.generated.RoomKeyControls.RoomConditions.getDefaultInstance()) return this;
-      if (other.getTemp() != 0D) {
+      if (other.getTemp() != 0) {
         setTemp(other.getTemp());
       }
       if (other.getHumidity() != 0) {
@@ -435,28 +432,28 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private double temp_ ;
+    private int temp_ ;
     /**
-     * <code>double temp = 1;</code>
+     * <code>int32 temp = 1;</code>
      */
-    public double getTemp() {
+    public int getTemp() {
       return temp_;
     }
     /**
-     * <code>double temp = 1;</code>
+     * <code>int32 temp = 1;</code>
      */
-    public Builder setTemp(double value) {
+    public Builder setTemp(int value) {
       
       temp_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>double temp = 1;</code>
+     * <code>int32 temp = 1;</code>
      */
     public Builder clearTemp() {
       
-      temp_ = 0D;
+      temp_ = 0;
       onChanged();
       return this;
     }

@@ -35,7 +35,7 @@ public final class RoomKeyControlsImpl {
     java.lang.String[] descriptorData = {
       "\n\025RoomKeyControls.proto\022\017RoomKeyControls" +
       "\" \n\013RoomRequest\022\021\n\troom_name\030\001 \001(\t\"0\n\016Ro" +
-      "omConditions\022\014\n\004temp\030\001 \001(\001\022\020\n\010humidity\030\002" +
+      "omConditions\022\014\n\004temp\030\001 \001(\005\022\020\n\010humidity\030\002" +
       " \001(\0052o\n\017RoomKeyControls\022\\\n\025RoomControlCo" +
       "nditions\022\034.RoomKeyControls.RoomRequest\032\037" +
       ".RoomKeyControls.RoomConditions\"\000(\0010\001B7\n" +

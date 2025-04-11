@@ -7,6 +7,7 @@ option java_outer_classname = "RoomStatusImpl";
 package RoomStatus;
 
 // The service definition
+// SERVER STREAMING
 // The server that you implement must extend the class  <servicename>ImplBase
 // so in this example you will create a server class that extends ---> RoomStatusImplBase
 

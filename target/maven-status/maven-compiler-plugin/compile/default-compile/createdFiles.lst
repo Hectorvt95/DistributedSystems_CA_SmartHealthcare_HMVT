@@ -59,6 +59,7 @@ grpc\generated\RoomStatus\BedUpdateOrBuilder.class
 distsys\week6_lab\HospitalGUI$11.class
 grpc\generated\PatientsRoomControl\GapRequestOrBuilder.class
 distsys\week6_lab\RKCServer.class
+distsys\week6_lab\RoomNotFoundException.class
 distsys\week6_lab\HospitalGUI$9.class
 grpc\generated\PatientsRoomControl\PatientsRoomControlGrpc$PatientsRoomControlFutureStub.class
 distsys\week6_lab\RoomStatus$Room.class

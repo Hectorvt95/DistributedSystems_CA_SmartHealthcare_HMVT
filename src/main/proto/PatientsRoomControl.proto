@@ -7,6 +7,7 @@ option java_outer_classname = "PatientsRoomControlImpl";
 package PatientsRoomControl;
 
 // The service definition.
+// UNARY SERVICE
 // The server that you implement must extend the class  <servicename>ImplBase
 // so in this example you will create a server class that extends ---> PatientsRoomControlImplBase
 

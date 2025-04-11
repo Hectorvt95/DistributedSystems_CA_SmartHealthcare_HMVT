@@ -8,9 +8,9 @@ public interface RoomConditionsOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>double temp = 1;</code>
+   * <code>int32 temp = 1;</code>
    */
-  double getTemp();
+  int getTemp();
 
   /**
    * <code>int32 humidity = 2;</code>

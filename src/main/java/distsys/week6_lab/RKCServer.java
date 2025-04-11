@@ -4,6 +4,7 @@
 
 package distsys.week6_lab;
 
+import distsys.week6_lab.RoomsSettings.RoomValues;
 import grpc.generated.RoomKeyControls.*;
 import grpc.generated.RoomKeyControls.RoomKeyControlsGrpc.RoomKeyControlsImplBase;
 
@@ -12,6 +13,9 @@ import io.grpc.ServerBuilder; //this is from the stub, to generate an instance o
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
 
 import java.util.logging.Logger; 
 
@@ -68,24 +72,28 @@ public class RKCServer extends RoomKeyControlsImplBase {
             public void onNext(RoomRequest request) {
 
                 System.out.println(LocalTime.now().toString() + ": received a message: " + request.getRoomName());
-               
-                int [] roomsValue = (int []) room.getRoomValues(request.getRoomName());
                 
-                int temp = roomsValue[0];
-                int humidity = roomsValue[1];
+                List<RoomValues> roomsValue = (List<RoomValues>) room.getRoomValues(request.getRoomName());
+                Iterator<RoomValues> i = roomsValue.iterator();
                 
-                RoomConditions reply = RoomConditions.newBuilder()
-                                        .setTemp(temp)
-                                        .setHumidity(humidity)
+                while(i.hasNext()){
+                    RoomValues values = i.next();
+                    RoomConditions reply = RoomConditions.newBuilder()
+                                        .setTemp(values.getTemp())
+                                        .setHumidity(values.getHum())
                                         .build();
-                
-                
-                responseObserver.onNext(reply);
+                    responseObserver.onNext(reply);
+                    try {
+                        Thread.sleep(1500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(RKCServer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                responseObserver.onCompleted();
             }
 
             @Override
             public void onError(Throwable t) {
-
             }
 
             @Override

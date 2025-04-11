@@ -6,6 +6,7 @@ option java_outer_classname = "RoomKeyControlsImpl";
 
 package RoomKeyControls;
 
+// BI DI STREAMING 
 // The service definition.
 // The server that you implement must extend the class  <servicename>ImplBase
 // so in this example you will create a server class that extends ---> RoomKeyControlsImplBase
@@ -33,7 +34,7 @@ service RoomKeyControls {
 
    // The response message containing answer from the server
    message RoomConditions {
-     double temp = 1;
+     int32 temp = 1;
      int32  humidity = 2;
    }
  

@@ -30,12 +30,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.time.LocalTime;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
-import static jdk.internal.net.http.common.Log.channel;
 
 /**
  *
@@ -64,7 +62,7 @@ public class HospitalClient {
         
         String token = Jwts.builder()
                 .setSubject("Hector Valle")
-                .signWith(SignatureAlgorithm.HS256, "HectorVall-DS-CA@2024-Authorization")
+                .signWith(SignatureAlgorithm.HS256, "HectorValle-DS-CA@2024-Authorization")
                 .compact();
         
         String host = "localhost";
@@ -119,8 +117,8 @@ public class HospitalClient {
         LightRequest request = LightRequest.newBuilder()
                 .setLightRequest(value)    //this is going to be taken from the gui
                 .build();
-        LightResponse response =  prc_syncStub.lightControl(request);   
-        SwingUtilities.invokeLater(() -> textArea.append("The value of the light been dimmed to " + value + "%." + "\n"));
+        LightResponse response =  prc_syncStub.lightControl(request);  
+        SwingUtilities.invokeLater(() -> textArea.append("The value of the light been dimmed to " + response.getLightResponse() + "%." + "\n" + "\n"));
         //System.out.println("The value of the light been dimmed to " + response.getLightResponse() + "%.");
     }
     
@@ -131,7 +129,7 @@ public class HospitalClient {
                 .setHeightRequest(value)  //this is going to be taken from the gui
                 .build();
         HeightResponse response = prc_syncStub.bedHeight(request);
-        SwingUtilities.invokeLater(() -> textArea.append("The value of the height is at its " + value + "%." + "\n"));
+        SwingUtilities.invokeLater(() -> textArea.append("The value of the height is at its " + response.getHeightResponse() + "%." + "\n" + "\n"));
         //System.out.println("The value of the height is at its " + response.getHeightResponse() + "%.");
     }
     
@@ -142,7 +140,7 @@ public class HospitalClient {
                 .setCourtainsRequest(value)  //this is going to be taken from the gui
                 .build();
         GapResponse response = prc_syncStub.courtainsGap(request);
-        SwingUtilities.invokeLater(() -> textArea.append("The courtains are " + value + "% open." + "\n"));
+        SwingUtilities.invokeLater(() -> textArea.append("The courtains are " + response.getCourtainsResponse() + "% open." + "\n" + "\n"));
         //System.out.println("The courtains are " + response.getCourtainsResponse() + "% open." );
     }
     
@@ -155,8 +153,10 @@ public class HospitalClient {
     public void requestRKC_values(String roomName, JTextArea textArea){
         final String message;
         System.out.println("Bi Di Streaming - Room Key Control - Values for all of the Room Settings");
+        SwingUtilities.invokeLater(() -> textArea.append("Response from server : The values registered in the last 4 days are: \n")); // setText(message));
+       
         StreamObserver<RoomConditions> responseObserver = new StreamObserver<RoomConditions>() {
-            
+         
             @Override
             public void onNext(RoomConditions response){
                String sTemp = String.valueOf(response.getTemp());
@@ -228,7 +228,8 @@ public class HospitalClient {
                 
             }else{
                 
-                SwingUtilities.invokeLater(() -> textArea.append("No Such Room Exception: Unexistent Room \n"));
+                SwingUtilities.invokeLater(() -> textArea.append("NoSuchRoomException: Unexistent Room \n"));
+                throw new RoomNotFoundException();
             }
            
             
@@ -274,6 +275,7 @@ public class HospitalClient {
         try{
         StreamObserver<PatientData> requestObserver = sm_asyncStub.smartPatientMonitor(responseObserver);
         return requestObserver;
+        
         }finally{
            //channelSM.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
         }
