@@ -29,6 +29,17 @@ public class HospitalGUI extends javax.swing.JFrame {
         
         hospitalClient = new HospitalClient();
         
+        jTextField2.setText("Enter the room you want to request");
+        
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+        @Override
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            if (jTextField2.getText().equals("Enter the room you want to request")) {
+                jTextField2.setText("");
+            }
+        }
+    });
+        
     }
 
     /**
@@ -472,7 +483,6 @@ public class HospitalGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Room Status - Server Streaming", jPanel5);
 
-        jTextField2.setText("Write the room here");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -642,10 +652,15 @@ public class HospitalGUI extends javax.swing.JFrame {
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
+        
+        
         String name = jTextField2.getText().trim();
         hospitalClient.requestRKC_values(name,jTextArea3);
     }//GEN-LAST:event_jTextField2ActionPerformed
-
+    
+    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {                                         
+        jTextField1.setText("");
+    }
     
     
     

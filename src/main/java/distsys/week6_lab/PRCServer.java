@@ -22,27 +22,20 @@ public class PRCServer extends PatientsRoomControlImplBase {
     private static final Logger logger = Logger.getLogger(PRCServer.class.getName());
 
     public static void main(String[] args) {
-
         PRCServer Serviceserver = new PRCServer();
-
         int port = 50051;
-
         try {
                 Server server = ServerBuilder.forPort(port)
                     .addService(Serviceserver)
                     .intercept(new AuthorizationServerInterceptor())
                     .build()
                     .start();
-                 logger.info("Server started, listening on " + port);
-
-         System.out.println(" Server started, listening on " + port);		   
+                logger.info("Server started, listening on " + port);
+         System.out.println("Server started, listening on " + port);		   
                  server.awaitTermination();
-
-
         } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-
         } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -52,8 +45,7 @@ public class PRCServer extends PatientsRoomControlImplBase {
     @Override  
     public void lightControl(LightRequest request, StreamObserver<LightResponse> responseObserver){  
         String reg = String.valueOf(request.getLightRequest()) ;
-        LightResponse lightResponse = LightResponse.newBuilder().setLightResponse(reg).build();
-        
+        LightResponse lightResponse = LightResponse.newBuilder().setLightResponse(reg).build(); 
         responseObserver.onNext(lightResponse);
         responseObserver.onCompleted();
     }
@@ -62,7 +54,6 @@ public class PRCServer extends PatientsRoomControlImplBase {
     public void bedHeight(HeightRequest request, StreamObserver<HeightResponse> response){  
         String reg = String.valueOf(request.getHeightRequest()) ;
         HeightResponse heightResponse = HeightResponse.newBuilder().setHeightResponse(reg).build();
-        
         response.onNext(heightResponse);
         response.onCompleted();      
     }
@@ -71,7 +62,6 @@ public class PRCServer extends PatientsRoomControlImplBase {
     public void courtainsGap(GapRequest request, StreamObserver<GapResponse> response){   
         String reg = String.valueOf(request.getCourtainsRequest()) ;
         GapResponse gapResponse = GapResponse.newBuilder().setCourtainsResponse(reg).build();
-        
         response.onNext(gapResponse);
         response.onCompleted();       
     }

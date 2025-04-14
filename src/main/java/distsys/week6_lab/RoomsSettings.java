@@ -61,140 +61,67 @@ public final class RoomsSettings {
         
         
         //Map with all the special rooms
-        Rooms = new HashMap<String, List<RoomValues> >();
+        Rooms = new HashMap<String, RoomValues>();
         
         //Neonatal intensive care unit
-        List<RoomValues> neonatalValues = new ArrayList<>();
+        Rooms.put("neonatal unit", new RoomValues(randomNumber(17,25),randomNumber(39,61))); //the first element is the temperature, the second one is the humidity
         
-        neonatalValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        neonatalValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        neonatalValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        neonatalValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("neonatal unit", neonatalValues ); //the first element is the temperature, the second one is the humidity
-        
-
         //Microbiology
-        List<RoomValues> microbiologyValues = new ArrayList<>();
-        
-        microbiologyValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        microbiologyValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        microbiologyValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        microbiologyValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-
-        Rooms.put("microbiology unit", microbiologyValues);
-        
+        Rooms.put("microbiology unit", new RoomValues(randomNumber(17,23),randomNumber(39,61)));
         
         //Hematology
-        List<RoomValues> hematologyValues = new ArrayList<>();
-        
-        hematologyValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        hematologyValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        hematologyValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        hematologyValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("hematology unit", hematologyValues);
-        
+        Rooms.put("hematology unit", new RoomValues(randomNumber(17,23),randomNumber(39,61)));
         
         //Molecular Diagnostics
-        List<RoomValues> molecularValues = new ArrayList<>();
-        
-        molecularValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        molecularValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        molecularValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        molecularValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("molecular diagnostics unit", molecularValues);
+        Rooms.put("molecular diagnostics unit", new RoomValues(randomNumber(17,25),randomNumber(39,61)));
         
         //Sterile Storage
-        List<RoomValues> sterileValues = new ArrayList<>();
-        
-        molecularValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        molecularValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        molecularValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        molecularValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("sterile storage unit", sterileValues);
+        Rooms.put("sterile storage unit", new RoomValues(randomNumber(17,21),randomNumber(39,61)));
         
         //Operating Theater
-        List<RoomValues> operatingValues = new ArrayList<>();
-        
-        operatingValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        operatingValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        operatingValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        operatingValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("operating theater unit", operatingValues);
+        Rooms.put("operating theater unit", new RoomValues(randomNumber(17,23),randomNumber(39,61)));
         
         //Patient Rooms
-        List<RoomValues> room1Values = new ArrayList<>();
-        
-        room1Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room1Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room1Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room1Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("room 1", room1Values);
+        Rooms.put("room 1", new RoomValues(randomNumber(17,24),randomNumber(29,61)));
         
         //Patient Rooms
-        List<RoomValues> room2Values = new ArrayList<>();
-        
-        room2Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room2Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room2Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room2Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("room 2", room2Values);
+        Rooms.put("room 2", new RoomValues(randomNumber(17,24),randomNumber(29,61)));
         
         //Patient Rooms
-        List<RoomValues> room3Values = new ArrayList<>();
-        
-        room3Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room3Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room3Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        room3Values.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("room 3", room3Values);
+        Rooms.put("room 3", new RoomValues(randomNumber(17,24),randomNumber(29,61)));
         
         //Pharmaceutical Storage
-        List<RoomValues> pharmaValues = new ArrayList<>();
-        
-        pharmaValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        pharmaValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        pharmaValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        pharmaValues.add(new RoomValues(randomNumber(17,23),randomNumber(39,61)));
-        
-        Rooms.put("pharmaceutical storage unit", pharmaValues);
+        Rooms.put("pharmaceutical storage unit", new RoomValues(randomNumber(17,26),randomNumber(29,61)));
        
     }
     
-    public List<RoomValues> getRoomValues(String roomName) {
+    public int[] getRoomValues(String roomName) {
         
-        if (Rooms.containsKey(roomName)){
-            
-            return (List<RoomValues>) Rooms.get(roomName);
-            
-        }else{
+        RoomValues room = (RoomValues) Rooms.get(roomName);
         
-            throw new RoomNotFoundException();
+        if (room != null) {
             
-        }// or negative values if the room or values don't exist
+            return new int[]{room.getTemp(), room.getHum()};
+            
+        }
+        return new int[]{-100, -100}; // or negative values if the room or values don't exist
     }
-
+    
     
     
     public static void main(String [] args){
         
         RoomsSettings settings = new RoomsSettings();
         
-        List<RoomValues> values = settings.getRoomValues("pharmaceutical storage unit");
+        int[] values = settings.getRoomValues("Neonatal Unit");
         
-        System.out.println("Neonatal Unit Temperature: " + values.toString());
-        
+        System.out.println("Neonatal Unit Temperature: " + values[0]);
+        System.out.println("Neonatal Unit Humidity: " + values[1]);
         
         
     }
 
+    
     
     
 }

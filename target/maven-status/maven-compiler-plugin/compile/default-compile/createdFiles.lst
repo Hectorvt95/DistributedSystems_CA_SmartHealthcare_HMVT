@@ -11,6 +11,7 @@ distsys\week6_lab\JwtCallCredentials.class
 distsys\week6_lab\HospitalClient.class
 distsys\week6_lab\HospitalGUI$5.class
 grpc\generated\SmartMonitor\SmartMonitorGrpc$SmartMonitorMethodDescriptorSupplier.class
+distsys\week6_lab\HospitalGUI$16.class
 grpc\generated\RoomKeyControls\RoomKeyControlsGrpc$1.class
 grpc\generated\RoomStatus\RoomStatusImpl.class
 grpc\generated\PatientsRoomControl\PatientsRoomControlGrpc$PatientsRoomControlMethodDescriptorSupplier.class

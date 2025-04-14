@@ -58,7 +58,7 @@ public class RKCServer extends RoomKeyControlsImplBase {
  
     
     
-    @Override
+ @Override
     public StreamObserver<RoomRequest> roomControlConditions(StreamObserver<RoomConditions> responseObserver) {
 
 
@@ -72,28 +72,24 @@ public class RKCServer extends RoomKeyControlsImplBase {
             public void onNext(RoomRequest request) {
 
                 System.out.println(LocalTime.now().toString() + ": received a message: " + request.getRoomName());
+               
+                int [] roomsValue = (int []) room.getRoomValues(request.getRoomName());
                 
-                List<RoomValues> roomsValue = (List<RoomValues>) room.getRoomValues(request.getRoomName());
-                Iterator<RoomValues> i = roomsValue.iterator();
+                int temp = roomsValue[0];
+                int humidity = roomsValue[1];
                 
-                while(i.hasNext()){
-                    RoomValues values = i.next();
-                    RoomConditions reply = RoomConditions.newBuilder()
-                                        .setTemp(values.getTemp())
-                                        .setHumidity(values.getHum())
+                RoomConditions reply = RoomConditions.newBuilder()
+                                        .setTemp(temp)
+                                        .setHumidity(humidity)
                                         .build();
-                    responseObserver.onNext(reply);
-                    try {
-                        Thread.sleep(1500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(RKCServer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                responseObserver.onCompleted();
+                
+                
+                responseObserver.onNext(reply);
             }
 
             @Override
             public void onError(Throwable t) {
+
             }
 
             @Override

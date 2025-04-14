@@ -153,7 +153,7 @@ public class HospitalClient {
     public void requestRKC_values(String roomName, JTextArea textArea){
         final String message;
         System.out.println("Bi Di Streaming - Room Key Control - Values for all of the Room Settings");
-        SwingUtilities.invokeLater(() -> textArea.append("Response from server : The values registered in the last 4 days are: \n")); // setText(message));
+        SwingUtilities.invokeLater(() -> textArea.append("Response from server - The current values for the room are: \n")); // setText(message));
        
         StreamObserver<RoomConditions> responseObserver = new StreamObserver<RoomConditions>() {
          
