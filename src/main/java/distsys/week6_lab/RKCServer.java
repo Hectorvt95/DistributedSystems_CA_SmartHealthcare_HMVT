@@ -4,7 +4,6 @@
 
 package distsys.week6_lab;
 
-import distsys.week6_lab.RoomsSettings.RoomValues;
 import grpc.generated.RoomKeyControls.*;
 import grpc.generated.RoomKeyControls.RoomKeyControlsGrpc.RoomKeyControlsImplBase;
 
@@ -13,9 +12,6 @@ import io.grpc.ServerBuilder; //this is from the stub, to generate an instance o
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
 
 import java.util.logging.Logger; 
 
@@ -60,42 +56,33 @@ public class RKCServer extends RoomKeyControlsImplBase {
     
  @Override
     public StreamObserver<RoomRequest> roomControlConditions(StreamObserver<RoomConditions> responseObserver) {
-
-
+        
         return new StreamObserver<RoomRequest>() {
 
-    
             RoomsSettings room = new RoomsSettings();
 
             @Override
-           
             public void onNext(RoomRequest request) {
 
                 System.out.println(LocalTime.now().toString() + ": received a message: " + request.getRoomName());
-               
                 int [] roomsValue = (int []) room.getRoomValues(request.getRoomName());
-                
                 int temp = roomsValue[0];
-                int humidity = roomsValue[1];
-                
+                int humidity = roomsValue[1];     
                 RoomConditions reply = RoomConditions.newBuilder()
                                         .setTemp(temp)
                                         .setHumidity(humidity)
-                                        .build();
-                
-                
+                                        .build(); 
                 responseObserver.onNext(reply);
             }
 
             @Override
             public void onError(Throwable t) {
-
             }
 
             @Override
             public void onCompleted() {
                 System.out.printf(LocalTime.now().toString() + ": Message stream complete \n");
-                     responseObserver.onCompleted();
+                responseObserver.onCompleted();
             }
 
         }; 

@@ -4,9 +4,6 @@
 
 package distsys.week6_lab;
 
-import distsys.week6_lab.RoomStatus.Room;
-
-
 import grpc.generated.PatientsRoomControl.PatientsRoomControlGrpc;
 import grpc.generated.PatientsRoomControl.PatientsRoomControlGrpc.PatientsRoomControlBlockingStub;
 import grpc.generated.PatientsRoomControl.*;
@@ -30,6 +27,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.time.LocalTime;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
@@ -40,32 +38,23 @@ import javax.swing.SwingUtilities;
  * @author marti
  */
 public class HospitalClient {
-    
-    //Lets create the observer that is going to be looking after the different server stream methods
-    private StreamObserver<RoomConditions> roomRequestObserver;
-    private StreamObserver<PatientData> patientdataRequestObserver;
-   
     //a blocking stub to make a synchronus call --> PatientsRoomControl - Unary
     private static PatientsRoomControlBlockingStub prc_syncStub;
-
     //a non blocking stub to make an asynchronus call --> RoomKeyControls - BI DI stream
     private static RoomKeyControlsStub rkc_asyncStub;
-
     //a non blocking stub to make an ascynchronus call --> SmartMonitor - Client streaming
     public static SmartMonitorStub sm_asyncStub;
-    
     //a non blocking stub to make an ascynchronus call --> RoomStatus - Server Streaming
     public static RoomStatusStub rs_asyncStub;
     
     //lets initialize our hospital client class
     public HospitalClient(){
-        
+        //TOKEN AND CREDENTIALS FOR THE SERVER 
         String token = Jwts.builder()
                 .setSubject("Hector Valle")
                 .signWith(SignatureAlgorithm.HS256, "HectorValle-DS-CA@2024-Authorization")
                 .compact();
-        
-        String host = "localhost";
+                String host = "localhost";
         
         //STUB FOR PATIENTS ROOM CONTROL
         int prcserver = 50051;
@@ -98,7 +87,7 @@ public class HospitalClient {
                         .usePlaintext()
                         .build();
         rs_asyncStub = RoomStatusGrpc.newStub(channelRS).withCallCredentials(new JwtCallCredentials(token)); //RS
-        
+       
     }
 
   
@@ -111,7 +100,7 @@ public class HospitalClient {
 
     }
     
-    //** UNARY - PATIENTS ROOM CONTROL
+    //** UNARY - PATIENTS ROOM CONTROL -> PRCServer
     public void requestPRC_lightControl(JTextArea textArea, int value){
         SwingUtilities.invokeLater(() -> textArea.append("Unary - PatientRoomControl - Lights Control." + "\n"));
         LightRequest request = LightRequest.newBuilder()
@@ -149,7 +138,7 @@ public class HospitalClient {
     
     
     
-    //** BI DI - ROOM KEY CONTROL
+    //** BI DI - ROOM KEY CONTROL -> RKCServer
     public void requestRKC_values(String roomName, JTextArea textArea){
         final String message;
         System.out.println("Bi Di Streaming - Room Key Control - Values for all of the Room Settings");
@@ -220,19 +209,12 @@ public class HospitalClient {
                         message = "Client called the server for the Pharmaceutical Storage Unit values";
                         break;
                 }
-                
                 requestObserver.onNext(RoomRequest.newBuilder().setRoomName(roomName.toLowerCase()).build());  //this is going to be taken from the gui
                 SwingUtilities.invokeLater(() -> textArea.append(message + "\n"));
-                //System.out.println("Client called the server for the Neonatal Intensive Care Unit Values");
-                //Thread.sleep(500);
-                
             }else{
-                
-                SwingUtilities.invokeLater(() -> textArea.append("NoSuchRoomException: Unexistent Room \n"));
+                SwingUtilities.invokeLater(() -> textArea.append("NoSuchRoomException: Unexistent Room " + roomName.toLowerCase() + "\n"));
                 throw new RoomNotFoundException();
             }
-           
-            
         }catch (RuntimeException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -269,25 +251,19 @@ public class HospitalClient {
     }
     
     
-    //Client Streaming - SMART MONITOR
+    //Client Streaming - SMART MONITOR -> SMServer
     public StreamObserver<PatientData> sendPatientData(StreamObserver<Validation> responseObserver) throws InterruptedException{
         
-        try{
-        StreamObserver<PatientData> requestObserver = sm_asyncStub.smartPatientMonitor(responseObserver);
+        StreamObserver<PatientData> requestObserver = sm_asyncStub.withDeadlineAfter(25, TimeUnit.SECONDS) .smartPatientMonitor(responseObserver);
         return requestObserver;
-        
-        }finally{
-           //channelSM.shutdownNow().awaitTermination(5,TimeUnit.SECONDS);
-        }
  
     }
 
     
-    //Server Streaming - ROOM STATUS
-    public void RoomStatus (JTextArea textArea){
+    //Server Streaming - ROOM STATUS - RSServer
+    public void RoomStatus(JTextArea textArea){
         
         StatusRequest request = StatusRequest.newBuilder().build();
-        
         StreamObserver<BedUpdate> responseObserver = new StreamObserver<BedUpdate>() {
             
             @Override
@@ -295,26 +271,20 @@ public class HospitalClient {
                 try {
                     SwingUtilities.invokeLater(() -> textArea.append(String.valueOf(request + "\n")));
                     Thread.sleep(1500);
-                    // SwingUtilities.invokeLater(() -> textArea.append(request.getName()));
-                    // SwingUtilities.invokeLater(() -> textArea.append(request.getStatus()));
-                    // SwingUtilities.invokeLater(() -> textArea.append(String.valueOf(request.getPatientId())));
-                    // SwingUtilities.invokeLater(() -> textArea.append(String.valueOf(request.getPatientId())));
-                } catch (InterruptedException ex) {
+             } catch (InterruptedException ex) {
                     Logger.getLogger(HospitalClient.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             
             @Override
-            public void onError(Throwable t){
-                
+            public void onError(Throwable t){  
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
             public void onCompleted() {
-                SwingUtilities.invokeLater(() -> textArea.append("Client received completed " + "\n"));
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                SwingUtilities.invokeLater(() -> textArea.append("Client received completed " + "\n"));  
             }
-
         };
         
         rs_asyncStub.streamBedStatus(request, responseObserver);
@@ -325,11 +295,10 @@ public class HospitalClient {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-            
         }
   
         
-    }
+}//class
     
     
     

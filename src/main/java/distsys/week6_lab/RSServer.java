@@ -6,14 +6,11 @@ package distsys.week6_lab;
 
 import grpc.generated.RoomStatus.BedUpdate;
 import grpc.generated.RoomStatus.RoomStatusGrpc.RoomStatusImplBase;
-import grpc.generated.RoomStatus.StatusRequest;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder; //this is from the stub, to generate an instance of StreamObserver
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
-import java.time.LocalTime;
 import java.util.Iterator;
 import java.util.List;
 

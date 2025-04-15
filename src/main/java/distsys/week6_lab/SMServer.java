@@ -8,8 +8,6 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder; //this is from the stub, to generate an instance of StreamObserver
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import java.util.logging.Logger; 
 

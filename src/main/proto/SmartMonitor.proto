@@ -6,12 +6,11 @@ option java_outer_classname = "SmartMonitorImpl";
 
 package SmartMonitor;
 
-// The service definition.
 // CLIENT STREAMING
 // The server that you implement must extend the class  <servicename>ImplBase
 // so in this example you will create a server class that extends ---> SmartMonitorImplBase
 
-// SmartMonitor manages the patients temperature, blood pressure, hearth rate, carbon dioxide levels and respiration rate.
+// SmartMonitor manages the patients temperature, blood pressure, hearth rate. Also asks for the patients name and room.
 
 // There is a monitor that is reading different values and if there is something wrong it will call bell immediately ---> Smart Healthcare system IoT;
 // values: temperature, blood pressure, hearth rate
@@ -24,10 +23,9 @@ service SmartMonitor {
   rpc SmartPatientMonitor(stream PatientData) returns(Validation) {}
 
 }
-
    //  message identifying a location
    message PatientData {
-    int32  room_number = 1;
+    int32   room_number = 1;
     string  patient_name = 2;
     int32   temperature = 3;
     int32   blood_pressure = 4;

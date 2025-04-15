@@ -20,7 +20,6 @@ import javax.swing.SwingUtilities;
 public class HospitalGUI extends javax.swing.JFrame {
     
     HospitalClient hospitalClient;
-    StreamObserver<RoomRequest> requestObserver;
     StreamObserver<PatientData> smRequestObserver;
     
     public HospitalGUI() {
@@ -69,15 +68,15 @@ public class HospitalGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        SendPatientName = new javax.swing.JButton();
+        CompleteClientStreaming = new javax.swing.JButton();
+        SendPatientRoomNumber = new javax.swing.JButton();
+        SendTemperature = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
+        SendBloodPressure = new javax.swing.JButton();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
@@ -86,9 +85,9 @@ public class HospitalGUI extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jButton14 = new javax.swing.JButton();
+        SendHeartRate = new javax.swing.JButton();
         jTextField6 = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
+        PrepareClientStreaming = new javax.swing.JButton();
         jLabel34 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -231,31 +230,37 @@ public class HospitalGUI extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
-        jButton4.setText("Send Patient Name");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jTextField1ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Complete");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        SendPatientName.setText("Send Patient Name");
+        SendPatientName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                SendPatientNameActionPerformed(evt);
             }
         });
 
-        jButton8.setText("Send Patient Room Number");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        CompleteClientStreaming.setText("Complete");
+        CompleteClientStreaming.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                CompleteClientStreamingActionPerformed(evt);
             }
         });
 
-        jButton9.setText("Send Temperature");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        SendPatientRoomNumber.setText("Send Patient Room Number");
+        SendPatientRoomNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                SendPatientRoomNumberActionPerformed(evt);
+            }
+        });
+
+        SendTemperature.setText("Send Temperature");
+        SendTemperature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SendTemperatureActionPerformed(evt);
             }
         });
 
@@ -267,10 +272,10 @@ public class HospitalGUI extends javax.swing.JFrame {
 
         jLabel23.setText("3)");
 
-        jButton11.setText("Send Blood Pressure");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        SendBloodPressure.setText("Send Blood Pressure");
+        SendBloodPressure.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                SendBloodPressureActionPerformed(evt);
             }
         });
 
@@ -284,21 +289,21 @@ public class HospitalGUI extends javax.swing.JFrame {
 
         jLabel30.setText("5)");
 
-        jButton14.setText("Send Heart rate");
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        SendHeartRate.setText("Send Heart rate");
+        SendHeartRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                SendHeartRateActionPerformed(evt);
             }
         });
 
-        jButton10.setText("Prepare the Client Streaming Service");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        PrepareClientStreaming.setText("Prepare the Client Streaming Service");
+        PrepareClientStreaming.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                PrepareClientStreamingActionPerformed(evt);
             }
         });
 
-        jLabel34.setText("For every Client that we would like to check, we have to initiate a preparation for Client Streaming first ------>");
+        jLabel34.setText("For every Client that we would like to check, we have to initiate a preparation for Client Streaming first      ------>");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -328,8 +333,8 @@ public class HospitalGUI extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton8))
+                                            .addComponent(SendPatientName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(SendPatientRoomNumber))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,8 +346,8 @@ public class HospitalGUI extends javax.swing.JFrame {
                                                 .addComponent(jLabel22)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jButton11))))
+                                                    .addComponent(SendTemperature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(SendBloodPressure))))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -357,15 +362,15 @@ public class HospitalGUI extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(128, 128, 128)
-                                        .addComponent(jButton5)
+                                        .addComponent(CompleteClientStreaming)
                                         .addGap(69, 69, 69))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel30)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(PrepareClientStreaming, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                                                .addComponent(SendHeartRate, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                         .addGap(17, 17, 17))))
@@ -384,19 +389,19 @@ public class HospitalGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
-                    .addComponent(jButton10))
+                    .addComponent(PrepareClientStreaming))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton4)
+                                    .addComponent(SendPatientName)
                                     .addComponent(jLabel1)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(7, 7, 7)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton8)
+                                    .addComponent(SendPatientRoomNumber)
                                     .addComponent(jLabel21)
                                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -404,18 +409,18 @@ public class HospitalGUI extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel22)
                                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton11)))
+                                    .addComponent(SendBloodPressure)))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel23)
                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton9)))
+                                .addComponent(SendTemperature)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jButton5))
+                        .addComponent(CompleteClientStreaming))
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton14)
+                        .addComponent(SendHeartRate)
                         .addComponent(jLabel30)
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(21, 21, 21))
@@ -687,7 +692,7 @@ public class HospitalGUI extends javax.swing.JFrame {
     
     //Smart Monitor
     //on complete
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void CompleteClientStreamingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompleteClientStreamingActionPerformed
         // TODO add your handling code here:
         smRequestObserver.onCompleted();
         jTextField1.setText("");
@@ -695,75 +700,80 @@ public class HospitalGUI extends javax.swing.JFrame {
         jTextField4.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_CompleteClientStreamingActionPerformed
 
     //name
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void SendPatientNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendPatientNameActionPerformed
         // TODO add your handling code here:
+        String value;
         try{
-            String value = jTextField1.getText().trim();
+            value = jTextField1.getText().trim();
             smRequestObserver.onNext(PatientData.newBuilder().setPatientName(value).build());
             SwingUtilities.invokeLater(() -> jTextArea2.append("Patient's name sent." + "\n"));
             
-        }catch (RuntimeException e){
-            e.printStackTrace();
+        }catch (Exception e){
+            System.out.println(e + "\n" + "The value " + jTextField1.getText() + " is not of type String");
+            SwingUtilities.invokeLater(() -> jTextArea2.append(e + "\n" + "The value " + jTextField1.getText() + " is not of type String" + "\n"));
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_SendPatientNameActionPerformed
     
     //room
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void SendPatientRoomNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendPatientRoomNumberActionPerformed
         // TODO add your handling code here:
         try{
             int value = Integer.parseInt(jTextField3.getText().trim());
             smRequestObserver.onNext(PatientData.newBuilder().setRoomNumber(value).build());
             SwingUtilities.invokeLater(() -> jTextArea2.append("Room number sent." + "\n"));
             
-        }catch (RuntimeException e){
-            e.printStackTrace();
+        }catch (Exception e){
+            System.out.println(e + "\n" + "The value " + jTextField3.getText() + " is not of type Integer");
+            SwingUtilities.invokeLater(() -> jTextArea2.append(e + "\n" + "The value " + jTextField3.getText() + " is not of type Integer" + "\n"));
         }
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_SendPatientRoomNumberActionPerformed
 
     //temperature
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void SendTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendTemperatureActionPerformed
         // TODO add your handling code here:
         try{
             int value = Integer.parseInt(jTextField4.getText().trim());
             smRequestObserver.onNext(PatientData.newBuilder().setTemperature(value).build());
             SwingUtilities.invokeLater(() -> jTextArea2.append("Temperature sent." + "\n"));
             
-        }catch (RuntimeException e){
-            e.printStackTrace();
+        }catch (Exception e){
+            System.out.println(e + "\n" + "The value " + jTextField4.getText() + " is not of type Integer");
         }
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_SendTemperatureActionPerformed
 
     //bloodpressure
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void SendBloodPressureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendBloodPressureActionPerformed
         // TODO add your handling code here:
         try{
             int value = Integer.parseInt(jTextField5.getText().trim());
             smRequestObserver.onNext(PatientData.newBuilder().setBloodPressure(value).build());
             SwingUtilities.invokeLater(() -> jTextArea2.append("Blood pressure sent." + "\n"));
             
-        }catch (RuntimeException e){
-            e.printStackTrace();
+        }catch (Exception e){
+            System.out.println(e + "\n" + "The value " + jTextField5.getText() + " is not of type Integer");
+            SwingUtilities.invokeLater(() -> jTextArea2.append(e + "\n" + "The value " + jTextField5.getText() + " is not of type Integer" + "\n"));
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_SendBloodPressureActionPerformed
 
     //blood pressure
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void SendHeartRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendHeartRateActionPerformed
         // TODO add your handling code here:
         try{
             int value = Integer.parseInt(jTextField6.getText().trim());
             smRequestObserver.onNext(PatientData.newBuilder().setElectRate(value).build());
             SwingUtilities.invokeLater(() -> jTextArea2.append("Heart rate sent." + "\n"));
             
-        }catch (RuntimeException e){
-            e.printStackTrace();
+        }catch (Exception e){
+            System.out.println(e + "\n" + "The value " + jTextField6.getText() + " is not of type Integer");
+            SwingUtilities.invokeLater(() -> jTextArea2.append(e + "\n" + "The value " + jTextField6.getText() + " is not of type Integer"));            
         }
-    }//GEN-LAST:event_jButton14ActionPerformed
+    }//GEN-LAST:event_SendHeartRateActionPerformed
 
     //Object initialization as if we were in the client
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void PrepareClientStreamingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrepareClientStreamingActionPerformed
         
         StreamObserver<Validation> smResponseObserver = new StreamObserver<Validation>(){
             
@@ -793,7 +803,7 @@ public class HospitalGUI extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(HospitalGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_PrepareClientStreamingActionPerformed
 
     
     
@@ -804,6 +814,10 @@ public class HospitalGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         hospitalClient.RoomStatus(jTextArea4);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -848,18 +862,18 @@ public class HospitalGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CompleteClientStreaming;
+    private javax.swing.JButton PrepareClientStreaming;
+    private javax.swing.JButton SendBloodPressure;
+    private javax.swing.JButton SendHeartRate;
+    private javax.swing.JButton SendPatientName;
+    private javax.swing.JButton SendPatientRoomNumber;
+    private javax.swing.JButton SendTemperature;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
