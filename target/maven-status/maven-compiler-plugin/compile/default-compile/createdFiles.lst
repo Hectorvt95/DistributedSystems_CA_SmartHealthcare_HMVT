@@ -30,7 +30,6 @@ grpc\generated\RoomKeyControls\RoomKeyControlsGrpc$RoomKeyControlsFutureStub.cla
 grpc\generated\SmartMonitor\PatientDataOrBuilder.class
 grpc\generated\PatientsRoomControl\GapResponse.class
 grpc\generated\SmartMonitor\SmartMonitorGrpc$SmartMonitorBlockingStub.class
-distsys\week6_lab\HospitalGUI$17.class
 grpc\generated\PatientsRoomControl\HeightResponse.class
 grpc\generated\PatientsRoomControl\LightResponse$Builder.class
 distsys\week6_lab\HospitalGUI$4.class
